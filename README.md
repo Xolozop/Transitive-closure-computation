@@ -1,2 +1,23 @@
-# Transitive-closure-computation
-Efficient transitive closure computation in large digraphs
+Файл `main.cpp` содержит класс графа, а также пример графа (см. `graph.img`)
+Для компиляции требуется команда 
+```bash
+g++ main.cpp -o graph
+./graph
+```
+Результатом выполнения команды будет представление графа в виде матрицы, списка смежностей и перечня рёбер, а также файл `graph.dot`.
+Для визуализации графа необходимо установить пакет Graphviz.
+
+Для Ubuntu: 
+```bash
+sudo apt install graphviz
+```
+Для Arch:
+```bash
+sudo pacman -S graphviz
+```
+
+После установки пакета требуется запустить команду
+```bash
+dot -Tpng graph.dot -o graph.png
+```
+Результатом будет визуализация графа, которую можно найти в файле `graph.png`.
