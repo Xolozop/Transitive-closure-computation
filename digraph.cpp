@@ -65,7 +65,8 @@ void DiGraph::printEdgeList(std::ostream& os) {
 }
     
 void DiGraph::visualize(const std::string& filename, bool show) {
-    std::string dotFile = filename + ".dot";
+    std::system("mkdir -p results");
+    std::string dotFile = "results/" + filename + ".dot";
     std::ofstream out(dotFile);
     out << "digraph G {\n";
     for (const auto& edge : edgeList)
@@ -73,7 +74,7 @@ void DiGraph::visualize(const std::string& filename, bool show) {
     out << "}";
     out.close();
 
-    std::string pngFile = filename + ".png";
+    std::string pngFile = "results/" + filename + ".png";
     char buffer[22 + dotFile.size() + pngFile.size()];
     sprintf(buffer, "dot -Tpng %s -o %s", dotFile.data(), pngFile.data());
     std::system(buffer);

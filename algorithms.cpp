@@ -1,7 +1,7 @@
 #include "algorithms.h"
 
 DiGraph Warshall(DiGraph G) {
-    std::vector<std::vector<size_t>> A = G.getAdjMatrix();
+    adjMatrix_t A = G.getAdjMatrix();
     size_t n = G.getVertices();
     for (size_t k = 0; k < n; k++) {
         for (size_t i = 0; i < n; i++) {
@@ -16,7 +16,7 @@ DiGraph Warshall(DiGraph G) {
 }
 
 DiGraph Warren(DiGraph G) {
-    std::vector<std::vector<size_t>> A = G.getAdjMatrix();
+    adjMatrix_t A = G.getAdjMatrix();
     size_t n = G.getVertices();
     for (size_t i = 3; i < n; i++) {
         for (size_t k = 2; k < i-1; k++) {
