@@ -1,28 +1,36 @@
-#include "digraph.h"
-#include "algorithms.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <memory>
+#include <iomanip>
+
+#include "graph.h"
+#include "algorithms/ebert_algorithm.h"
+#include "representations/representation.h"
+#include "representations/succ_list.h"
 
 int main() {
-    DiGraph g(5);
-
-    g.addEdge(0, 1);
-    g.addEdge(0, 4);
-    g.addEdge(1, 2);
-    g.addEdge(1, 3);
+    // Example
+    Graph g(10);
     g.addEdge(1, 4);
-    g.addEdge(2, 3);
-    g.addEdge(3, 4);
-    g.addEdge(1, 6);
+    g.addEdge(7, 1);
+    g.addEdge(4, 7);
+    g.addEdge(9, 7);
+    g.addEdge(6, 9);
+    g.addEdge(3, 6);
+    g.addEdge(9, 3);
+    g.addEdge(8, 6);
+    g.addEdge(2, 8);
+    g.addEdge(5, 2);
+    g.addEdge(8, 5);
 
     g.printAdjList();
-    g.printAdjMatrix();
-    g.printEdgeList();
+    g.visualize("graph.dot");
+    system("dot -Tpng graph.dot -o graph.png"); // <-- need to install graphvi
 
-    g.visualize("graph");
+    SuccessorsList gCV(listType::CV); 
+    findSCCs_Ebert(g, gCV);
+    gCV.printSCC();
 
-    DiGraph h1 = Warshall(g);
-    h1.visualize("graph2");
-    DiGraph h2 = Warshall(g);
-    h2.visualize("graph3", true);
     return 0;
 }
-
