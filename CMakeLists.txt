@@ -8,9 +8,8 @@ file(GLOB SOURCES
     graph.h
     algorithms/*.cpp
     algorithms/*.h
-    representations/representation.h
-    representations/succ*.cpp
-    representations/succ*.h
+    representations/*.cpp
+    representations/*.h
 )
 
 

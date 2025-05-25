@@ -153,6 +153,30 @@ algorithms/ebert_algorithm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert_algorithm.cpp.s
 .PHONY : algorithms/ebert_algorithm.cpp.s
 
+algorithms/schmitz_algorithm.o: algorithms/schmitz_algorithm.cpp.o
+.PHONY : algorithms/schmitz_algorithm.o
+
+# target to build an object file
+algorithms/schmitz_algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.o
+.PHONY : algorithms/schmitz_algorithm.cpp.o
+
+algorithms/schmitz_algorithm.i: algorithms/schmitz_algorithm.cpp.i
+.PHONY : algorithms/schmitz_algorithm.i
+
+# target to preprocess a source file
+algorithms/schmitz_algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.i
+.PHONY : algorithms/schmitz_algorithm.cpp.i
+
+algorithms/schmitz_algorithm.s: algorithms/schmitz_algorithm.cpp.s
+.PHONY : algorithms/schmitz_algorithm.s
+
+# target to generate assembly for a file
+algorithms/schmitz_algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.s
+.PHONY : algorithms/schmitz_algorithm.cpp.s
+
 graph.o: graph.cpp.o
 .PHONY : graph.o
 
@@ -201,6 +225,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+representations/intervals.o: representations/intervals.cpp.o
+.PHONY : representations/intervals.o
+
+# target to build an object file
+representations/intervals.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/representations/intervals.cpp.o
+.PHONY : representations/intervals.cpp.o
+
+representations/intervals.i: representations/intervals.cpp.i
+.PHONY : representations/intervals.i
+
+# target to preprocess a source file
+representations/intervals.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/representations/intervals.cpp.i
+.PHONY : representations/intervals.cpp.i
+
+representations/intervals.s: representations/intervals.cpp.s
+.PHONY : representations/intervals.s
+
+# target to generate assembly for a file
+representations/intervals.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/representations/intervals.cpp.s
+.PHONY : representations/intervals.cpp.s
+
 representations/succ_list.o: representations/succ_list.cpp.o
 .PHONY : representations/succ_list.o
 
@@ -237,12 +285,18 @@ help:
 	@echo "... algorithms/ebert_algorithm.o"
 	@echo "... algorithms/ebert_algorithm.i"
 	@echo "... algorithms/ebert_algorithm.s"
+	@echo "... algorithms/schmitz_algorithm.o"
+	@echo "... algorithms/schmitz_algorithm.i"
+	@echo "... algorithms/schmitz_algorithm.s"
 	@echo "... graph.o"
 	@echo "... graph.i"
 	@echo "... graph.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... representations/intervals.o"
+	@echo "... representations/intervals.i"
+	@echo "... representations/intervals.s"
 	@echo "... representations/succ_list.o"
 	@echo "... representations/succ_list.i"
 	@echo "... representations/succ_list.s"

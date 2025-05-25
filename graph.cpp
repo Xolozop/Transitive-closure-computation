@@ -1,12 +1,23 @@
 #include "./graph.h"
 
 Graph::Graph(size_t vertices) : vertices(vertices) {
-    // gen();
-    // probDist(0.0, 1.0);
-    // vertexDist(0, (int)vertices-1);
     adjList.resize(vertices);
-    adjMatrix.resize(vertices, std::vector<size_t>(vertices, 0));
+    adjMatrix.resize(vertices, std::vector<bool>(vertices, 0));
     edgeList.reserve(vertices*(vertices-1)/2);
+}
+
+Graph::Graph(std::vector<std::vector<bool>> matrix) : vertices(matrix.size()) {
+    adjList.resize(vertices);
+    adjMatrix = matrix;
+    edgeList.reserve(vertices*(vertices-1)/2);
+    for (size_t row = 0; row < vertices; row++) {
+        for (size_t col = 0; col < vertices; col++) {
+            if (adjMatrix[row][col] == true) {
+                adjList[row].push_back(col);
+                edgeList.push_back(std::pair<size_t, size_t>(row, col));
+            }
+        }
+    }
 }
 
 const size_t Graph::size() const {
@@ -15,8 +26,12 @@ const size_t Graph::size() const {
 
 void Graph::addEdge(size_t u, size_t v) {
     adjList[u].push_back(v);
-    adjMatrix[u][v] = 1;
+    adjMatrix[u][v] = true;
     edgeList.push_back({u, v});
+}
+
+std::vector<std::vector<bool>> Graph::getAdjMatrix() const {
+    return adjMatrix;
 }
 
 std::vector<std::vector<size_t>> Graph::getAdjList() const {
@@ -24,7 +39,7 @@ std::vector<std::vector<size_t>> Graph::getAdjList() const {
 }
 
 void Graph::printAdjList() {
-    std::cout << "Список смежностей:\n";
+    std::cout << "Adjacency list:\n";
     for (size_t i = 0; i < vertices; i++) {
         std::cout << i << ": ";
         for (size_t v : adjList[i]) {
@@ -35,7 +50,7 @@ void Graph::printAdjList() {
 }
 
 void Graph::printAdjMatrix() {
-    std::cout << "Матрица смежностей:\n";
+    std::cout << "Adjacency matrix:\n";
     for (const auto& row : adjMatrix) {
         for (size_t val : row) {
             std::cout << std::setw(2) << val << " ";
@@ -45,7 +60,7 @@ void Graph::printAdjMatrix() {
 }
 
 void Graph::printEdgeList() {
-    std::cout << "Список рёбер:\n";
+    std::cout << "Edge list:\n";
     for (const auto& edge : edgeList) {
         std::cout << "(" << edge.first << ", " << edge.second << "); "; // Изменено на "->" для ориентированного графа
     }
@@ -89,7 +104,6 @@ void Graph::generate(size_t edges, GraphType type) {
                 if (vertices < edges && k+vertices/5 < vertices)
                     addEdge(k + vertices/5, k);
             }
-            std::cout << "ok" << std::endl;
             break;
     }
 }

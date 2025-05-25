@@ -1,17 +1,18 @@
-#pragma once
-#include <vector>
-#include <iostream>
-#include <fstream>
+#ifndef INTERVALS_H
+#define INTERVALS_H
 
 #include "./representation.h"
 
-template <typename T>
 class Intervals : public Representation {
 public:
-    Intervals(); // <- сюда бы ещё передавать бин дерево или массив
-    void addVertex(size_t u, size_t v) const override;
-    const std::vector<size_t>& getSuccessors(size_t v) const override;
-    virtual void printSuccessors() const override;
+    Intervals() = default;
+    const size_t size() const;
+    std::set<size_t> getSuccessors(size_t v) const override;
+    virtual void printSCC() const override;
+    void clear() override;
+    void update(std::set<size_t> component) override;
 private:
-    T intervals;
+    std::vector<std::vector<std::pair<size_t, size_t>>> intervals;
 };
+
+#endif
