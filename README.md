@@ -2,7 +2,7 @@
 ```bash
 cmake .
 make
-./trans-clos
+./SCC
 ```
 Для визуализации графа необходимо установить пакет Graphviz.
 
