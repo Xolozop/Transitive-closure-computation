@@ -5,58 +5,59 @@
 
 #include "./ebert_algorithm.h"
 
-// Глобальные переменные (как в оригинальном алгоритме Эберта)
-std::vector<int> NUMBER;
-std::vector<int> LOWLINK;
-std::stack<int> S;
-size_t NUM = 0;
+// Глобальные переменные для алгоритма Эберта
+std::vector<int> NUMBER; // Номер вершины при обходе DFS
+std::vector<int> LOWLINK; // Наименьший достижимый номер вершины
+std::stack<int> S; // Стек вершин текущей компоненты
+size_t NUM = 0; // Счётчик номеров вершин
 std::vector<std::vector<bool>> R; // Матрица транзитивного замыкания
-SuccessorsList SCCs(listType::CV);
+SuccessorsList SCCs(listType::CV); // Список компонент связности
 
+// Инициализация матрицы транзитивного замыкания (n x n)
 void initializeTransitiveClosure(size_t n) {
     R.assign(n, std::vector<bool>(n, false));
     for (size_t i = 0; i < n; ++i) {
-        R[i][i] = true; // Каждая вершина достижима сама из себя
+        R[i][i] = true; // Вершина достижима из себя
     }
 }
 
+// Обновление достижимости для ребра v -> w
 void processEdge(size_t v, size_t w) {
-    // R[v, *] := R[v, *] or e_w (единичный вектор для w)
     for (size_t j = 0; j < R.size(); ++j) {
-        R[v][j] = R[v][j] || (j == w);
+        R[v][j] = R[v][j] || (j == w); // j достижим из v, если j = w
     }
 }
 
+// Обновление достижимости для дуги дерева v -> w
 void processTreeArc(size_t v, size_t w) {
-    // R[v, *] := R[v, *] or R[w, *]
     for (size_t j = 0; j < R.size(); ++j) {
-        R[v][j] = R[v][j] || R[w][j];
+        R[v][j] = R[v][j] || R[w][j]; // j достижим из v, если достижим из w
     }
 }
 
+// Обработка перекрестного ребра между компонентами
 void processIntercomponentCrossLink(size_t v, size_t w) {
-    // Аналогично processTreeArc
-    processTreeArc(v, w);
+    processTreeArc(v, w); // Аналогично дуге дерева
 }
 
+// Обновление достижимости для вершины x в компоненте v
 void processVertexOfComponent(size_t x, size_t v) {
-    // R[x, *] := R[v, *]
-    R[x] = R[v];
+    R[x] = R[v]; // Копируем достижимость v для x
 }
 
+// DFS для поиска компонент связности
 void DFS(size_t v, const std::vector<std::vector<size_t>>& adjList, Representation& components) {
-    NUMBER[v] = LOWLINK[v] = ++NUM;
-    S.push(v);
+    NUMBER[v] = LOWLINK[v] = ++NUM; // Присваиваем номер и lowlink
+    S.push(v); // Добавляем в стек
 
     for (size_t w : adjList[v]) {
         if (NUMBER[w] == 0) {
-            // Деревянная дуга
+            // Дуга дерева: w не посещена
             DFS(w, adjList, components);
-            LOWLINK[v] = std::min(LOWLINK[v], LOWLINK[w]);
+            LOWLINK[v] = std::min(LOWLINK[v], LOWLINK[w]); // Обновляем lowlink
             processTreeArc(v, w);
-        } 
-        else if (NUMBER[w] < NUMBER[v]) {
-            // Обратная или перекрестная дуга
+        } else if (NUMBER[w] < NUMBER[v]) {
+            // Обратное или перекрестное ребро
             bool is_on_stack = false;
             std::stack<int> temp = S;
             while (!temp.empty()) {
@@ -66,34 +67,37 @@ void DFS(size_t v, const std::vector<std::vector<size_t>>& adjList, Representati
                 }
                 temp.pop();
             }
-            
             if (is_on_stack) {
+                // Обратное ребро: обновляем lowlink
                 LOWLINK[v] = std::min(LOWLINK[v], NUMBER[w]);
-                processEdge(v, w); // Обработка обратной дуги
-            }
-            else {
-                processIntercomponentCrossLink(v, w); // Обработка перекрестной дуги
+                processEdge(v, w);
+            } else {
+                // Перекрестное ребро
+                processIntercomponentCrossLink(v, w);
             }
         }
     }
 
+    // Если v — корень компоненты
     if (LOWLINK[v] == NUMBER[v]) {
         std::set<size_t> component;
+67
         size_t x;
         do {
             x = S.top();
             S.pop();
             component.insert(x);
-            processVertexOfComponent(x, v); // Обновляем транзитивное замыкание для компоненты
+            processVertexOfComponent(x, v);
         } while (x != v);
-        components.update(component);
+        components.update(component); // Сохраняем компоненту
     }
 }
 
+// Поиск сильно связанных компонент
 Graph findSCCs_Ebert(Graph g, Representation& components) {
-    std::vector<std::vector<size_t>> adjList = g.getAdjList(); 
+    std::vector<std::vector<size_t>> adjList = g.getAdjList();
     size_t n = adjList.size();
-    
+
     // Инициализация
     NUMBER.assign(n, 0);
     LOWLINK.assign(n, 0);
@@ -101,10 +105,12 @@ Graph findSCCs_Ebert(Graph g, Representation& components) {
     S = std::stack<int>();
     initializeTransitiveClosure(n);
 
+    // Обход всех вершин
     for (size_t i = 0; i < n; ++i) {
         if (NUMBER[i] == 0) {
             DFS(i, adjList, components);
         }
     }
-    return Graph(R);
+
+    return Graph(R); // Возвращаем граф транзитивного замыкания
 }

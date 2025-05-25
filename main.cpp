@@ -12,7 +12,6 @@
 #include "representations/succ_list.h"
 
 int main() {
-    // Example
     Graph g(10);
     g.generate(20, RANDOM);
     /*
