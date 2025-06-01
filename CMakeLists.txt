@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB SOURCES
     graph.cpp
     graph.h
+    utils.cpp
+    utils.h
     algorithms/*.cpp
     algorithms/*.h
     representations/*.cpp

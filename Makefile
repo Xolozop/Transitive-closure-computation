@@ -129,29 +129,53 @@ SCC/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/build
 .PHONY : SCC/fast
 
-algorithms/ebert_algorithm.o: algorithms/ebert_algorithm.cpp.o
-.PHONY : algorithms/ebert_algorithm.o
+algorithms/cr_tc.o: algorithms/cr_tc.cpp.o
+.PHONY : algorithms/cr_tc.o
 
 # target to build an object file
-algorithms/ebert_algorithm.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert_algorithm.cpp.o
-.PHONY : algorithms/ebert_algorithm.cpp.o
+algorithms/cr_tc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/cr_tc.cpp.o
+.PHONY : algorithms/cr_tc.cpp.o
 
-algorithms/ebert_algorithm.i: algorithms/ebert_algorithm.cpp.i
-.PHONY : algorithms/ebert_algorithm.i
+algorithms/cr_tc.i: algorithms/cr_tc.cpp.i
+.PHONY : algorithms/cr_tc.i
 
 # target to preprocess a source file
-algorithms/ebert_algorithm.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert_algorithm.cpp.i
-.PHONY : algorithms/ebert_algorithm.cpp.i
+algorithms/cr_tc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/cr_tc.cpp.i
+.PHONY : algorithms/cr_tc.cpp.i
 
-algorithms/ebert_algorithm.s: algorithms/ebert_algorithm.cpp.s
-.PHONY : algorithms/ebert_algorithm.s
+algorithms/cr_tc.s: algorithms/cr_tc.cpp.s
+.PHONY : algorithms/cr_tc.s
 
 # target to generate assembly for a file
-algorithms/ebert_algorithm.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert_algorithm.cpp.s
-.PHONY : algorithms/ebert_algorithm.cpp.s
+algorithms/cr_tc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/cr_tc.cpp.s
+.PHONY : algorithms/cr_tc.cpp.s
+
+algorithms/ebert.o: algorithms/ebert.cpp.o
+.PHONY : algorithms/ebert.o
+
+# target to build an object file
+algorithms/ebert.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert.cpp.o
+.PHONY : algorithms/ebert.cpp.o
+
+algorithms/ebert.i: algorithms/ebert.cpp.i
+.PHONY : algorithms/ebert.i
+
+# target to preprocess a source file
+algorithms/ebert.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert.cpp.i
+.PHONY : algorithms/ebert.cpp.i
+
+algorithms/ebert.s: algorithms/ebert.cpp.s
+.PHONY : algorithms/ebert.s
+
+# target to generate assembly for a file
+algorithms/ebert.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert.cpp.s
+.PHONY : algorithms/ebert.cpp.s
 
 algorithms/schmitz_algorithm.o: algorithms/schmitz_algorithm.cpp.o
 .PHONY : algorithms/schmitz_algorithm.o
@@ -176,6 +200,30 @@ algorithms/schmitz_algorithm.s: algorithms/schmitz_algorithm.cpp.s
 algorithms/schmitz_algorithm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.s
 .PHONY : algorithms/schmitz_algorithm.cpp.s
+
+algorithms/stack_tc.o: algorithms/stack_tc.cpp.o
+.PHONY : algorithms/stack_tc.o
+
+# target to build an object file
+algorithms/stack_tc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/stack_tc.cpp.o
+.PHONY : algorithms/stack_tc.cpp.o
+
+algorithms/stack_tc.i: algorithms/stack_tc.cpp.i
+.PHONY : algorithms/stack_tc.i
+
+# target to preprocess a source file
+algorithms/stack_tc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/stack_tc.cpp.i
+.PHONY : algorithms/stack_tc.cpp.i
+
+algorithms/stack_tc.s: algorithms/stack_tc.cpp.s
+.PHONY : algorithms/stack_tc.s
+
+# target to generate assembly for a file
+algorithms/stack_tc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/stack_tc.cpp.s
+.PHONY : algorithms/stack_tc.cpp.s
 
 graph.o: graph.cpp.o
 .PHONY : graph.o
@@ -273,6 +321,30 @@ representations/succ_list.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/representations/succ_list.cpp.s
 .PHONY : representations/succ_list.cpp.s
 
+utils.o: utils.cpp.o
+.PHONY : utils.o
+
+# target to build an object file
+utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/utils.cpp.o
+.PHONY : utils.cpp.o
+
+utils.i: utils.cpp.i
+.PHONY : utils.i
+
+# target to preprocess a source file
+utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/utils.cpp.i
+.PHONY : utils.cpp.i
+
+utils.s: utils.cpp.s
+.PHONY : utils.s
+
+# target to generate assembly for a file
+utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/utils.cpp.s
+.PHONY : utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,12 +354,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SCC"
-	@echo "... algorithms/ebert_algorithm.o"
-	@echo "... algorithms/ebert_algorithm.i"
-	@echo "... algorithms/ebert_algorithm.s"
+	@echo "... algorithms/cr_tc.o"
+	@echo "... algorithms/cr_tc.i"
+	@echo "... algorithms/cr_tc.s"
+	@echo "... algorithms/ebert.o"
+	@echo "... algorithms/ebert.i"
+	@echo "... algorithms/ebert.s"
 	@echo "... algorithms/schmitz_algorithm.o"
 	@echo "... algorithms/schmitz_algorithm.i"
 	@echo "... algorithms/schmitz_algorithm.s"
+	@echo "... algorithms/stack_tc.o"
+	@echo "... algorithms/stack_tc.i"
+	@echo "... algorithms/stack_tc.s"
 	@echo "... graph.o"
 	@echo "... graph.i"
 	@echo "... graph.s"
@@ -300,6 +378,9 @@ help:
 	@echo "... representations/succ_list.o"
 	@echo "... representations/succ_list.i"
 	@echo "... representations/succ_list.s"
+	@echo "... utils.o"
+	@echo "... utils.i"
+	@echo "... utils.s"
 .PHONY : help
 
 

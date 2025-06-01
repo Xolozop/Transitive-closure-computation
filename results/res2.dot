@@ -1,0 +1,20 @@
+digraph G {
+    0 -> 1;
+    1 -> 2;
+    2 -> 0;
+    3 -> 1;
+    4 -> 3;
+    0 -> 0[style = dashed];
+    0 -> 2[style = dashed];
+    1 -> 0[style = dashed];
+    1 -> 1[style = dashed];
+    2 -> 1[style = dashed];
+    2 -> 2[style = dashed];
+    3 -> 0[style = dashed];
+    3 -> 2[style = dashed];
+    3 -> 3[style = dashed];
+    4 -> 0[style = dashed];
+    4 -> 1[style = dashed];
+    4 -> 2[style = dashed];
+    4 -> 4[style = dashed];
+}
