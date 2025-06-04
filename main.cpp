@@ -9,7 +9,6 @@
 #include "algorithms/ebert.h"
 #include "algorithms/cr_tc.h"
 #include "algorithms/stack_tc.h"
-#include "algorithms/schmitz_algorithm.h"
 #include "representations/representation.h"
 #include "representations/intervals.h"
 #include "representations/succ_list.h"
