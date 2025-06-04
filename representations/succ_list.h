@@ -15,6 +15,7 @@ public:
     virtual void printSCC() const override; // Вывод компоненты связности
     void clear() override; // Очищение списка
     void update(std::set<size_t> component) override; // Добавление новой компоненты
+
 private:
     std::vector<std::set<size_t>> list; // Список множеств вершин/компонент
     listType type; // Тип списка (CC, CV, VV)

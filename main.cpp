@@ -15,11 +15,28 @@
 #include "representations/succ_list.h"
 #include "./utils.h"
 
+const char* getType(GraphType t) {
+    switch(t) {
+        case GraphType::RANDOM:
+            return "Random";
+        case GraphType::STRONGLY_CONNECTED:
+            return "Strongly connected";
+        case GraphType::DISCONNECTED_COMPONENTS:
+            return "Disconnected components";
+        case GraphType::MANY_CYCLES:
+            return "Many cycles";
+        default:
+            return "Unknown";
+    }
+}
+
 void run_tests() {
     const GraphType types[] = {RANDOM, DISCONNECTED_COMPONENTS, STRONGLY_CONNECTED, MANY_CYCLES};
-    const size_t sizes[] = {1000, 2000, 3000};
+    const size_t sizes[] = {100, 500, 1000, 5000};
     for (GraphType type : types) {
+        std::cout << "TYPE: " << getType(type) << " (edge probability = 0.15)" << std::endl;
         for (size_t size : sizes) {
+            std::cout << "Generating graph..." << std::endl;
             Graph g(size);
             g.generate(type, 0.15);
             Graph g_copy1 = g;
@@ -31,48 +48,33 @@ void run_tests() {
             Ebert alg_ebert(g);
             alg_ebert.getTransitiveClosure(g, SCC);
             double time_ebert = timer.stop();
+            std::cout << time_ebert << std::endl;
 
             timer.start();
             CR_TC alg_cr(g);
             alg_cr.getTransitiveClosure(g, SCC);
             double time_cr = timer.stop();
+            std::cout << time_cr << std::endl;
 
             timer.start();
             STACK_TC alg_stack(g);
             alg_stack.getTransitiveClosure(g, SCC);
             double time_stack = timer.stop();
+            std::cout << time_stack << std::endl;
         }
     }
 }
 
 int main() {
-    Graph g(10);
-    g.generate(20, RANDOM);
-    /*
-    0: 
-    1: 0 1 3 5 6 7 8 
-    2: 7 
-    3: 2 8 
-    4: 
-    5: 2 
-    6: 0 7 
-    7: 0 2 5 8 9 
-    8: 0 1 
-    9: 3 6 
-    */
-    // g.addEdge(1, 4);
-    // g.addEdge(7, 1);
-    // g.addEdge(4, 7);
-    // g.addEdge(9, 7);
-    // g.addEdge(6, 9);
-    // g.addEdge(3, 6);
-    // g.addEdge(9, 3);
-    // g.addEdge(8, 6);
-    // g.addEdge(2, 8);
-    // g.addEdge(5, 2);
-    // g.addEdge(8, 5);
+    run_tests();
 
-    g.printAdjList();
+    /* example
+    Graph g(5);
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(3, 1);
+    g.addEdge(4, 3);
     g.visualize("graph.dot");
     system("dot -Tpng graph.dot -o graph.png"); // <-- need to install graphvi
     Graph g2 = g;
@@ -113,4 +115,5 @@ int main() {
             printf("%d -> %d\n", i.first, i.second);
     }
     return 0;
+    */
 }
