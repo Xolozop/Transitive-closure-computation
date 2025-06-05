@@ -48,7 +48,7 @@ void Ebert::DFS(size_t v, Representation& components) {
     // Если v — корень компоненты
     if (root[v] == number[v]) {
         std::set<size_t> component;
-        size_t x;
+        size_t x; 
         do {
             x = S.top();
             S.pop();

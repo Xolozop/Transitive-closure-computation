@@ -1,106 +1,105 @@
-#include "./stack_tc.h"
+#include "stack_tc.h"
 
 STACK_TC::STACK_TC(Graph g) {
     n = g.size();
     adjList = g.getAdjList();
+
     number.assign(n, 0);
-    self_loop.assign(n, 0);
     root.assign(n, 0);
-    SavedHeight.assign(n, 0);
     S = std::stack<size_t>();
+
     VStack = std::stack<size_t>();
-    comp.assign(n, std::numeric_limits<size_t>::max());
+    SavedHeight.assign(n, 0);
+    self_loop.assign(n, false);
+
+    comp.resize(n);
     succ.resize(n);
+
     component_counter = 0;
-    for (auto& s : succ)
+    num = 0;
+
+    std::cout << "n = " << n << std::endl;
+    for (auto& s : succ) 
         s = std::make_shared<std::unordered_set<size_t>>();
 }
 
 void STACK_TC::getTransitiveClosure(Graph& g, Representation& components) {
     for (size_t v = 0; v < n; ++v) {
-        if (number[v] == 0)
-            stack_tc(v, components);
+        if (number[v] == 0) stack_tc(v, components);
     }
-    
+
+    puts("ok");
     g.saveTransitiveClosure(succ);
 }
 
 void STACK_TC::stack_tc(size_t v, Representation& components) {
-    number[v] = root[v] = ++num;
-    S.push(v);
-    VStack.push(v);
+    root[v] = number[v] = ++num;
     comp[v] = std::numeric_limits<size_t>::max();
-    SavedHeight[v] = S.size();
+
+    VStack.push(v);
+    S.push(v);
+
+    SavedHeight[v] = VStack.size();
+
     self_loop[v] = false;
 
     for (size_t w : adjList[v]) {
-        succ[v]->insert(w);  // Добавляем прямое ребро
-        
         if (w == v) {
             self_loop[v] = true;
             continue;
         }
 
         if (number[w] == 0) {
-            // Tree edge
             stack_tc(w, components);
-            root[v] = std::min(root[v], root[w]);
-            
-            // Добавляем successors дочерней компоненты
-            for (size_t s : *succ[w])
-                succ[v]->insert(s);
+            if (comp[w] == std::numeric_limits<size_t>::max()) {
+                root[v] = std::min(root[v], root[w]);
+            }
         } else if (comp[w] == std::numeric_limits<size_t>::max()) {
-            // Back edge - важное изменение!
             root[v] = std::min(root[v], number[w]);
-            succ[v]->insert(w);  // Явно добавляем обратное ребро
-            for (size_t s : *succ[w])  // И все его successors
-                succ[v]->insert(s);
-        } else {
-            // Cross edge
-            for (size_t s : *succ[w])
-                succ[v]->insert(s);
         }
     }
 
-    if (root[v] != number[v])
-        return;
+    if (root[v] == number[v]) {
+        std::set<size_t> C;
 
-    // Обработка компоненты сильной связности
-    std::set<size_t> component;
-    auto component_successors = std::make_shared<std::unordered_set<size_t>>();
+        bool flag = VStack.top() != v || self_loop[v];
 
-    // Собираем вершины компоненты
-    size_t w;
-    do {
-        w = VStack.top();
-        VStack.pop();
-        comp[w] = component_counter;
-        component.insert(w);
-        
-        // Добавляем всех successors вершин компоненты
-        for (size_t s : *succ[w]) {
-            if (component.find(s) == component.end()) {
-                component_successors->insert(s);
-            }
-        }
-    } while (w != v);
-
-    // Для циклических компонент добавляем все внутренние связи
-    if (component.size() > 1) {
-        for (size_t u : component) {
-            for (size_t v_in : component) {
-                if (u != v_in) {
-                    component_successors->insert(v_in);
+        while (S.size() != SavedHeight[v]) {
+            size_t X = S.top();
+            S.pop();
+            if (succ[v]->find(X) == succ[v]->end()) {
+                succ[v]->insert(X);
+                for (size_t s : *succ[X]) {
+                    succ[v]->insert(s);
                 }
             }
         }
-    }
 
-    // Обновляем successors для всех вершин компоненты
-    for (size_t u : component) {
-        succ[u] = component_successors;
-    }
+        size_t w;
+        do {
+            w = VStack.top();
+            VStack.pop();
+            comp[w] = component_counter;
+            C.insert(w);
+            succ[w] = succ[v];
+        } while (w != v);
 
-    components.update(component);
-    component_counter++;
+        if (C.size() > 1) {
+            succ[v]->insert(v);
+            for (size_t u : C) succ[u] = succ[v];
+        }
+
+        if (flag) {
+            C.insert(v);
+            succ[v]->clear();
+            if (self_loop[v]) 
+                succ[v]->insert(v);
+            C.clear();
+        } else {
+            succ[v]->clear();
+        }
+        
+        components.update(C);
+        component_counter++;
+    }
 }

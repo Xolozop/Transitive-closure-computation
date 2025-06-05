@@ -177,29 +177,29 @@ algorithms/ebert.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/ebert.cpp.s
 .PHONY : algorithms/ebert.cpp.s
 
-algorithms/schmitz_algorithm.o: algorithms/schmitz_algorithm.cpp.o
-.PHONY : algorithms/schmitz_algorithm.o
+algorithms/schmitz.o: algorithms/schmitz.cpp.o
+.PHONY : algorithms/schmitz.o
 
 # target to build an object file
-algorithms/schmitz_algorithm.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.o
-.PHONY : algorithms/schmitz_algorithm.cpp.o
+algorithms/schmitz.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz.cpp.o
+.PHONY : algorithms/schmitz.cpp.o
 
-algorithms/schmitz_algorithm.i: algorithms/schmitz_algorithm.cpp.i
-.PHONY : algorithms/schmitz_algorithm.i
+algorithms/schmitz.i: algorithms/schmitz.cpp.i
+.PHONY : algorithms/schmitz.i
 
 # target to preprocess a source file
-algorithms/schmitz_algorithm.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.i
-.PHONY : algorithms/schmitz_algorithm.cpp.i
+algorithms/schmitz.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz.cpp.i
+.PHONY : algorithms/schmitz.cpp.i
 
-algorithms/schmitz_algorithm.s: algorithms/schmitz_algorithm.cpp.s
-.PHONY : algorithms/schmitz_algorithm.s
+algorithms/schmitz.s: algorithms/schmitz.cpp.s
+.PHONY : algorithms/schmitz.s
 
 # target to generate assembly for a file
-algorithms/schmitz_algorithm.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz_algorithm.cpp.s
-.PHONY : algorithms/schmitz_algorithm.cpp.s
+algorithms/schmitz.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SCC.dir/build.make CMakeFiles/SCC.dir/algorithms/schmitz.cpp.s
+.PHONY : algorithms/schmitz.cpp.s
 
 algorithms/stack_tc.o: algorithms/stack_tc.cpp.o
 .PHONY : algorithms/stack_tc.o
@@ -360,9 +360,9 @@ help:
 	@echo "... algorithms/ebert.o"
 	@echo "... algorithms/ebert.i"
 	@echo "... algorithms/ebert.s"
-	@echo "... algorithms/schmitz_algorithm.o"
-	@echo "... algorithms/schmitz_algorithm.i"
-	@echo "... algorithms/schmitz_algorithm.s"
+	@echo "... algorithms/schmitz.o"
+	@echo "... algorithms/schmitz.i"
+	@echo "... algorithms/schmitz.s"
 	@echo "... algorithms/stack_tc.o"
 	@echo "... algorithms/stack_tc.i"
 	@echo "... algorithms/stack_tc.s"

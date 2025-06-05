@@ -10,9 +10,8 @@ CR_TC::CR_TC(Graph g) {
 
     succ.resize(n);
     comp.resize(n);
-    for (auto& s : succ) {
+    for (auto& s : succ)
         s = std::make_shared<std::unordered_set<size_t>>();
-    }
 }
 
 void CR_TC::getTransitiveClosure(Graph& g, Representation& components) {
@@ -40,13 +39,13 @@ void CR_TC::cr_tc(size_t v, Representation& components) {
             root[v] = std::min(root[v], root[w]);
         } 
         
-        // Добавляем саксессоры компоненты w, если она уже обработана (принадлежит какой-либо компоненте)
+        // Добавляем саксессоры компоненты w, если она уже принадлежит какой-либо компоненте
             // иными словами если имеется путь из v в какую-то вершину, то имеется и путь из v в вершины, смежные с ней
             // если же w не принадлежит существующей ксс, то она состоит с v в одной компоненте
         if (comp[w] != std::numeric_limits<size_t>::max()) {
             for (size_t s : *succ[w])
                 succ[v]->insert(s);
-        } else{
+        } else {
             root[v] = std::min(root[v], number[w]);
         }
     }
@@ -69,9 +68,8 @@ void CR_TC::cr_tc(size_t v, Representation& components) {
         } while (w != v);
 
         // Присваиваем всем вершинам компоненты общие successors
-        for (size_t u : component) {
+        for (size_t u : component)
             succ[u] = component_successors;
-        }
         
         components.update(component);
         component_counter++;

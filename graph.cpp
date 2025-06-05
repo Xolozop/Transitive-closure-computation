@@ -75,10 +75,7 @@ void Graph::generate(GraphType type, double edgeProbability) {
             break;
         case MANY_CYCLES:
             // Граф с множеством циклов
-            std::cout << vertices << " ";
             for (size_t k = 0; k < vertices; k += (int)vertices/5) {
-                std::cout << k << " ";
-                std::cout << std::endl;
                 for (size_t i = 0; i < vertices/5-1; i++)
                     addEdge(k + i, k + i + 1);
                 if (k+vertices/5 < vertices)
@@ -169,7 +166,7 @@ void Graph::printEdgeList() {
 void Graph::saveTransitiveClosure(std::vector<std::vector<bool>> R_plus) {
     for (size_t i = 0; i < vertices; i++) {
         for (size_t j = 0; j < vertices; j++) {
-            if (R_plus[i][j] != adjMatrix[i][j]) {
+            if (R_plus[i][j] && adjMatrix[i][j] == 0) {
                 transMatrix[i][j] = true;
                 transList.push_back({i, j});  
             }
