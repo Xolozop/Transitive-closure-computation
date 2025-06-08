@@ -82,6 +82,14 @@ void Graph::generate(GraphType type, double edgeProbability) {
                     addEdge(k + vertices/5, k); // Замыкание цикла
             }
             break;
+        case ACYCLIC: // случайное дерево
+            for (size_t i = 1; i < vertices; i++) {
+                size_t v = vertexDist(gen);
+                while (v == i)
+                    v = vertexDist(gen);
+                addEdge(v, i);
+            }
+            break;
     }
 }
 
@@ -166,7 +174,7 @@ void Graph::printEdgeList() {
 void Graph::saveTransitiveClosure(std::vector<std::vector<bool>> R_plus) {
     for (size_t i = 0; i < vertices; i++) {
         for (size_t j = 0; j < vertices; j++) {
-            if (R_plus[i][j] && adjMatrix[i][j] == 0) {
+            if (R_plus[i][j] && !adjMatrix[i][j]) {
                 transMatrix[i][j] = true;
                 transList.push_back({i, j});  
             }

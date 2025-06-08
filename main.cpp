@@ -6,10 +6,10 @@
 
 #include "graph.h"
 #include "algorithms/algorithm.h"
+#include "algorithms/warshall.h"
 #include "algorithms/ebert.h"
 #include "algorithms/schmitz.h"
 #include "algorithms/cr_tc.h"
-#include "algorithms/stack_tc.h"
 #include "representations/representation.h"
 #include "representations/intervals.h"
 #include "representations/succ_list.h"
@@ -31,16 +31,17 @@ const char* getType(GraphType t) {
 }
 
 void run_tests() {
-    const GraphType types[] = {RANDOM, STRONGLY_CONNECTED, MANY_CYCLES};
+    const GraphType types[] = {RANDOM, STRONGLY_CONNECTED, MANY_CYCLES, ACYCLIC};
     for (GraphType type : types) {
         std::cout << "TYPE: " << getType(type) << " (edge probability = 0.3)" << std::endl;
         std::cout << "n Ebert Schmitz CR_TC" << std::endl;
         for (size_t size = 100; size < 2100; size+=100) {
-            std::cout << size << " ";
+            // std::cout << size << " ";
             Graph g(size);
             g.generate(type, 0.3);
             Graph g_copy1 = g;
             Graph g_copy2 = g;
+            Graph g_copy3 = g;
             SuccessorsList SCC(listType::CV);
 
             Timer timer;
@@ -60,7 +61,14 @@ void run_tests() {
             CR_TC alg_cr(g);
             alg_cr.getTransitiveClosure(g, SCC);
             double time_cr = timer.stop();
-            std::cout << time_cr << std::endl;
+            std::cout << time_cr << " ";
+
+            // timer.start();
+            // Warshall alg_warshall(g_copy3);
+            // alg_warshall.getTransitiveClosure(g_copy3, SCC);
+            // double time_warshall = timer.stop();
+            // std::cout << time_warshall << " ";
+            std::cout << std::endl;
         }
     }
 }
